@@ -24,6 +24,7 @@
 #include <iomanip>
 #include <tuple>
 #include <functional>
+#include <stdexcept>
 
 namespace nonius {
     namespace detail {
@@ -97,7 +98,9 @@ namespace nonius {
 
         using arguments = std::unordered_multimap<std::string, std::string>;
 
-        struct argument_error {
+        struct argument_error : public std::logic_error {
+            using std::logic_error::logic_error;
+
             virtual ~argument_error() = default;
         };
 
@@ -107,7 +110,7 @@ namespace nonius {
                 if(++first != last) {
                     args.emplace(o.long_form, *first);
                 } else {
-                    throw argument_error();
+                    throw argument_error{"Iterator mismatch in parse_short"};
                 }
             } else {
                 args.emplace(o.long_form, "");
@@ -135,7 +138,8 @@ namespace nonius {
                     }
                 }
                 if(!parsed) {
-                    throw argument_error();
+                    throw argument_error{"Option " + *first +
+                        " does not match any short or long options from options_set"};
                 }
             }
             return args;

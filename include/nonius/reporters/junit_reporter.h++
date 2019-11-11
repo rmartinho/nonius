@@ -98,9 +98,9 @@ namespace nonius {
             report_stream() << ">\n";
 
             report_stream() << " <properties>\n";
-            report_stream() << "  <property name=\"samples\" value=\"" << n_samples << "\">\n";
-            report_stream() << "  <property name=\"confidence_interval\" value=\"" << std::setprecision(3) << confidence_interval << "\">\n";
-            report_stream() << "  <property name=\"resamples\" value=\"" << resamples << "\">\n";
+            report_stream() << "  <property name=\"samples\" value=\"" << n_samples << "\" />\n";
+            report_stream() << "  <property name=\"confidence_interval\" value=\"" << std::setprecision(3) << confidence_interval << "\" />\n";
+            report_stream() << "  <property name=\"resamples\" value=\"" << resamples << "\" />\n";
             report_stream() << " </properties>\n";
 
             for(auto tc : data) {
@@ -154,4 +154,3 @@ namespace nonius {
 } // namespace nonius
 
 #endif // NONIUS_REPORTERS_JUNIT_REPORTER_HPP
-
